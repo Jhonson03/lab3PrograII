@@ -1,4 +1,4 @@
-﻿using lab3.Data;
+using lab3.Data;
 using lab3.Model;
 using System;
 using System.Collections.Generic;
@@ -43,17 +43,19 @@ namespace lab3.DAO
             }
             else
             {
-                if(Lector == 1)
+                if (Lector == 1)
                 {
                     buscar.nombre = fa.nombre;
                 }
             }
+            db.Update(buscar);
+            db.SaveChanges();
         }
 
         public List<facultades> ViewFacultades()
         {
-            return db.facultades.ToList();  
+            return db.facultades.ToList();
         }
     }
-    
+
 }
