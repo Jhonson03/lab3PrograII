@@ -6,9 +6,9 @@ facultades fa = new facultades();
 
 bool vali1 = true;
 int IdWidth = 9;
-int NomWidth = 20;
+int NomWidth = 40;
 int coordth = 22;
-int asigwidth = 4;
+int asigwidth = 15;
 int docentwidth = 4;
 
 Console.WriteLine("Registro de facultades");
@@ -70,20 +70,15 @@ while (vali1 == true)
                 Console.WriteLine(new string('-', IdWidth + NomWidth + 8));
                 foreach (var i in db.ViewFacultades())
                 {
-                    Console.WriteLine($"{i.id.ToString().PadRight(IdWidth)} {i.nombre.PadRight(NomWidth)}  |");
+                    Console.WriteLine($"{i.id.ToString().PadRight(IdWidth)} {i.nombre.PadRight(NomWidth)}  ");
                 }
-                Console.Write("Ingrese el codigo ha actualizar: ");
+                Console.Write("\nIngrese el codigo ha actualizar: ");
                 var buscar = db.Facultadindivi(int.Parse(Console.ReadLine()));
-                Console.Write(@$"
-Ingrese el campo que desea actualizar
-
-1- Nombre {fa.nombre}
--> ");
-                var Lector = int.Parse(Console.ReadLine());
+                var Lector = 1;
                 switch (Lector)
                 {
                     case 1:
-                        Console.Write("Ingrese el nombre: ");
+                        Console.Write("\nIngrese el nombre: ");
                         buscar.nombre = Console.ReadLine();
                         break;
                 }
@@ -113,6 +108,25 @@ Ingrese el campo que desea actualizar
                     }
                 } while (!Vali3);
             }
+            break;
+
+        case 3:
+            var ListarEstudiante = db.ViewFacultades();
+
+            Console.WriteLine($"\n{"Codigo".PadRight(IdWidth)} {"Nombre".PadRight(NomWidth)} {"Coordinadores".PadRight(coordth)} {"Asignaturas".PadRight(asigwidth)} {"Docentes".PadRight(docentwidth)}");
+
+            Console.WriteLine(new string('-', IdWidth + NomWidth + coordth + asigwidth + docentwidth + 8));
+
+            foreach (var i in ListarEstudiante)
+            {
+                Console.WriteLine($"{i.id.ToString().PadRight(IdWidth)} {i.nombre.PadRight(NomWidth)} {i.coordinador.PadRight(coordth)} {i.asignaturas.ToString().PadRight(asigwidth)} {i.docentes.ToString().PadRight(docentwidth)}   |");
+            }
+            Console.WriteLine(new string('-', IdWidth + NomWidth + coordth + asigwidth + docentwidth + 8));
+
+            break;
+
+        case 4:
+            vali1 = false;
             break;
     }
 }
